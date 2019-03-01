@@ -3,3 +3,15 @@ terraform/credentials.json
 terraform/terraform.tfvars
 terraform/terraform.tfstate*
 tls/*
+terraform/*.backup
+terraform/*.swp
+terraform/config.sh
+terraform/override.tf
+terraform/*_override.tf
+terraform/*_svc.json
+terraform/*.out
+terraform/provider.tf
+terraform/code-dx-vars.tf
+terraform/plan.out
+terraform/*.crt
+terraform/*.key
