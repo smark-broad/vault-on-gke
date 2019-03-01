@@ -119,6 +119,15 @@ output "root_token" {
 
 # Uncomment this if you want to decrypt the token yourself
 # output "root_token_decrypt_command" {
-#   value = "gsutil cat gs://${google_storage_bucket.vault.name}/root-token.enc | base64 --decode | gcloud kms decrypt --project ${google_project.vault.project_id} --location ${var.region} --keyring ${google_kms_key_ring.vault.name} --key ${google_kms_crypto_key.vault-init.name} --ciphertext-file - --plaintext-file -"
+#   value = "gsutil cat gs://${google_storage_bucket.vault.name}/root-token.enc | base64 --decode | gcloud kms decrypt --project ${var.google_project} --location ${var.region} --keyring ${google_kms_key_ring.vault.name} --key ${google_kms_crypto_key.vault-init.name} --ciphertext-file - --plaintext-file -"
 # }
 
+# Render the YAML file
+data "template_file" "vault_vals" {
+  template = "${file("${path.module}/connectionvals.sh")}"
+
+  vars {
+    vault_address = "${google_compute_address.vault.address}"
+    root_token = "${data.google_kms_secret.keys.plaintext}"
+  }
+}

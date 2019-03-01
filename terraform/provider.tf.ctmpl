@@ -1,0 +1,22 @@
+{{with $project := env "PROJECT_NAME"}}
+{{with $environment := env "ENVIRONMENT"}}
+/*
+* Provider Configurations
+*/
+
+provider "google" {
+    credentials = "${file("{{$environment}}_svc.json")}"
+    project = "${var.google_project}"
+    region = "${var.region}"
+    version = "< 1.20"
+}
+
+provider "google" {
+    alias = "dsp-techops-prod"
+    credentials = "${file("prod_svc.json")}"
+    project = "${var.prod_google_project}"
+    region = "${var.region}"
+    version = "< 1.20"
+}
+{{end}}
+{{end}}

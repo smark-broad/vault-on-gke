@@ -1,15 +1,15 @@
 variable "region" {
   type    = "string"
-  default = "us-east4"
+  default = "us-central1"
 
   description = <<EOF
 Region in which to create the cluster and run Atlantis.
 EOF
 }
 
-variable "project" {
+variable "google_project" {
   type    = "string"
-  default = ""
+  default = "broad-dsp-techops-dev"
 
   description = <<EOF
 Project ID where Terraform is authenticated to run to create additional
@@ -23,22 +23,6 @@ variable "project_prefix" {
 
   description = <<EOF
 String value to prefix the generated project ID with.
-EOF
-}
-
-variable "billing_account" {
-  type = "string"
-
-  description = <<EOF
-Billing account ID.
-EOF
-}
-
-variable "org_id" {
-  type = "string"
-
-  description = <<EOF
-Organization ID.
 EOF
 }
 
@@ -223,7 +207,7 @@ EOF
 
 variable "vault_container" {
   type    = "string"
-  default = "vault:1.0.1"
+  default = "vault:1.0.3"
 
   description = <<EOF
 Name of the Vault container image to deploy. This can be specified like
